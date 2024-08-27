@@ -32,10 +32,9 @@ public class UserAccountController {
 		return userAccountService.register(userRegisterDto);
 	}
 
-	
-	public UserDto login() {
-		//TODO
-		return null;
+	@PostMapping("/logn")
+	public UserDto login(Principal principal) {
+		return userAccountService.getUser(principal.getName());
 	}
 
 	@GetMapping("/user/{login}")
@@ -63,8 +62,9 @@ public class UserAccountController {
 		return userAccountService.changeRolesList(login, role, false);
 	}
 
-	
-	public void changePassword() {
-		//TODO;
+	@PutMapping("/password")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void changePassword(Principal principal, @RequestHeader("X-Password") String newPassword) {
+		userAccountService.changePassword(principal.getName(), newPassword);
 	}
 }
