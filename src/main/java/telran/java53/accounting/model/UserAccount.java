@@ -1,10 +1,12 @@
 package telran.java53.accounting.model;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.jca.support.LocalConnectionFactoryBean;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,6 +25,8 @@ public class UserAccount {
 	@Setter
 	String password;
 	Set<Role> roles;
+	@Setter
+	LocalDate passwordExpDate;
 
 	public UserAccount() {
 		roles = new HashSet<>();
